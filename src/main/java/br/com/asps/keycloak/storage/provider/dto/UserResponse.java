@@ -1,17 +1,17 @@
-package br.com.asps.keycloak.storage.provider;
+package br.com.asps.keycloak.storage.provider.dto;
 
-public class User {
+public class UserResponse {
     private String firstName;
     private String lastName;
     private String email;
     private String userName;
     private String userId;
 
-    public User() {
+    public UserResponse() {
     }
 
-    public User(String firstName, String lastName, String email, String userName,
-                    String userId) {
+    public UserResponse(String firstName, String lastName, String email, String userName,
+                        String userId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

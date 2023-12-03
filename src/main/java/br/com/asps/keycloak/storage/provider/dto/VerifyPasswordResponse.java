@@ -1,10 +1,9 @@
-package br.com.asps.keycloak.storage.provider;
+package br.com.asps.keycloak.storage.provider.dto;
 
 public class VerifyPasswordResponse {
     private boolean result;
-    public VerifyPasswordResponse(boolean result) {
-        this.result = result;
-    }
+    public VerifyPasswordResponse() {}
+
     public boolean getResult() {
         return result;
     }

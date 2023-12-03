@@ -1,6 +1,6 @@
-package br.com.asps.keycloak.storage.provider;
+package br.com.asps.keycloak.storage.provider.provider;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import br.com.asps.keycloak.storage.provider.service.UsersApiService;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.models.KeycloakSession;
@@ -15,7 +15,7 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
 
     @Override
     public RemoteUserStorageProvider create(KeycloakSession keycloakSession, ComponentModel componentModel) {
-        return new RemoteUserStorageProvider(keycloakSession, componentModel, buildHttpClient("http://192.168.1.14:8099"));
+        return new RemoteUserStorageProvider(keycloakSession, componentModel, buildHttpClient());
     }
 
     @Override
@@ -23,10 +23,17 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
         return PROVIDER_NAME;
     }
 
-    private UsersApiService buildHttpClient(String uri){
+    private UsersApiService buildHttpClient(){
+        String uri = System.getenv("REMOTE_SERVICE_URI");
         Client client = ClientBuilder.newClient();
+
+        System.out.println("Criou o client");
+
         WebTarget target = client.target(uri);
+        System.out.println("Criou o target");
+
         ResteasyWebTarget rtarget = (ResteasyWebTarget)target;
+
         return rtarget.proxy(UsersApiService.class);
     }
 }
