@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  keycloak:
+    image: jboss/keycloak
+    ports:
+     - "8080:8080"
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    volumes:
+      - /home/adjackson/Documentos/Estudos/Oauth 2.0/keycloak_data:/opt/jboss/keycloaak/standalone/data
+      - /home/adjackson/IdeaProjects/KeycloakStorageProvider/target/remote-storage-provider.jar:/opt/jboss/keycloak/standalone/deployments/remote-storage-provider.jar
