@@ -20,5 +20,5 @@ public interface UsersApiService {
 
     @POST
     @Path("/{userName}/verify-password")
-    VerifyPasswordResponse verifyUserPassword(@PathParam("userName") String userName, String password);
+    VerifyPasswordResponse verifyUserPassword(@PathParam("userName") String userName, @QueryParam("password") String password);
 }
