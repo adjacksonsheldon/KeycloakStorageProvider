@@ -46,7 +46,7 @@ public class RemoteUserStorageProvider implements UserStorageProvider, UserLooku
 
     @Override
     public UserModel getUserByUsername(String userName, RealmModel realm) {
-        UserResponse userResponse = usersService.findByuserName(userName);
+        UserResponse userResponse = usersService.findByUsername(userName);
 
         if (nonNull(userResponse)) {
             return createUserModel(userName, realm);
@@ -66,13 +66,17 @@ public class RemoteUserStorageProvider implements UserStorageProvider, UserLooku
 
     @Override
     public UserModel getUserByEmail(String email, RealmModel realm) {
-        // TODO Auto-generated method stub
+        UserResponse userResponse = usersService.findByEmail(email);
+
+        if (nonNull(userResponse)) {
+            return createUserModel(userResponse.getUserName(), realm);
+        }
+
         return null;
     }
 
     @Override
     public boolean supportsCredentialType(String credentialType) {
-
         return PasswordCredentialModel.TYPE.equals(credentialType);
     }
 

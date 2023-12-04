@@ -2,12 +2,18 @@ version: '3'
 
 services:
   keycloak:
-    image: jboss/keycloak
+    image: jboss/keycloak:16.1.1
     ports:
-     - "8080:8080"
+      - "8080:8080"
     environment:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
+      - REMOTE_SERVICE_URI=http://172.17.0.1:8081
     volumes:
-      - /home/adjackson/Documentos/Estudos/Oauth 2.0/keycloak_data:/opt/jboss/keycloaak/standalone/data
-      - /home/adjackson/IdeaProjects/KeycloakStorageProvider/target/remote-storage-provider.jar:/opt/jboss/keycloak/standalone/deployments/remote-storage-provider.jar
+      - ./keycloak_data:/opt/jboss/keycloak/standalone/data
+      - ./target/remote-storage-provider.jar:/opt/jboss/keycloak/standalone/deployments/remote-storage-provider.jar
+    networks:
+      - minha-rede
+networks:
+  minha-rede:
+    driver: bridge

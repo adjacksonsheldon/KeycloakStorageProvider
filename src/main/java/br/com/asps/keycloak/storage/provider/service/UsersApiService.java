@@ -13,8 +13,10 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public interface UsersApiService {
 
     @GET
-    @Path("/{userName}")
-    UserResponse findByuserName(@PathParam("userName") String userName);
+    UserResponse findByUsername(@QueryParam("userName") String userName);
+
+    @GET
+    UserResponse findByEmail(@QueryParam("email") String email);
 
     @POST
     @Path("/{userName}/verify-password")
